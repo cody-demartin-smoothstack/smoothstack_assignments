@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+/Users/codydemartin/Development/smoothstack_assignments/.metadata/.plugins/org.eclipse.jdt.core
+2888586291.index
+2335416556.index
