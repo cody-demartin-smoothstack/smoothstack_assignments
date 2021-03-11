@@ -22,9 +22,7 @@ public class CharacterCounter {
 
         System.out.println(target + " appears " + result + " times.");
     }
-
-    // /Users/codydemartin/Development/smoothstack_assignments/March-10-2021/Resources/output.txt
-
+    
     public int counter(char[] arr, Character target){
         int counter = 0;
         for(Character c: arr){
