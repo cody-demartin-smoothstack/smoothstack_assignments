@@ -8,8 +8,8 @@ public class FileSearch {
     public static void main(String[] args) {
         System.out.println("Please enter a directory absolute path:");
         Scanner input = new Scanner(System.in);
-
         String mainPath = input.nextLine();
+
         FileSearch search = new FileSearch();
         File mainDirectory = new File(mainPath);
 
