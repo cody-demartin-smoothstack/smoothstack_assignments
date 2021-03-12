@@ -22,7 +22,7 @@ public class CharacterCounter {
 
         System.out.println(target + " appears " + result + " times.");
     }
-    
+
     public int counter(char[] arr, Character target){
         int counter = 0;
         for(Character c: arr){
