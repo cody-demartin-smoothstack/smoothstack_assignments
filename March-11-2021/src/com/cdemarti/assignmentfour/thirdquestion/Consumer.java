@@ -15,8 +15,7 @@ public class Consumer extends Thread {
                 e.printStackTrace();
             }
             for (int i = 0; i < 4; i++) {
-                System.out.print(p.buffer.charAt(i) + " ");
-                p.buffer.deleteCharAt(i);
+                System.out.println(p.buffer.charAt(i) + " ");
             }
         }
     }

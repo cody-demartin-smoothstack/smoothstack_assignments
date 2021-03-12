@@ -5,8 +5,8 @@ public class ConsumerProducerProblem {
         Producer p = new Producer();
         Consumer c = new Consumer(p);
 
-        Thread threadOne = new Thread(c);
-        Thread threadTwo = new Thread(p);
+        Thread threadOne = new Thread(p);
+        Thread threadTwo = new Thread(c);
 
         threadTwo.start();
         threadOne.start();

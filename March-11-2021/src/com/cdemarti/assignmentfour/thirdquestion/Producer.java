@@ -2,7 +2,6 @@ package com.cdemarti.assignmentfour.thirdquestion;
 
 public class Producer extends Thread {
     StringBuffer buffer;
-    boolean doneProducing = false;
 
     Producer(){
         buffer = new StringBuffer(4);
