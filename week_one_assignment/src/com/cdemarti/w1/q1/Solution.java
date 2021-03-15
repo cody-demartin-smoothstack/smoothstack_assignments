@@ -4,10 +4,20 @@ import java.sql.SQLOutput;
 
 public class Solution {
 
+    /**
+     * Method to assign a particular lambda to a given number
+     * @param func Some implementation of functional interface
+     * @param num Some integer number
+     */
     public static void checkOperation(PerformOperation func, int num){
         func.calculate(num);
     }
 
+
+    /**
+     * A lambda used for determining even or odd
+     * @return A lambda function
+     */
     PerformOperation isOdd(){
         PerformOperation oddOrEven = (num) -> {
             if( num == 0) System.out.println("NUMBER IS ZERO; NOT ODD OR EVEN");
@@ -23,6 +33,11 @@ public class Solution {
         return oddOrEven;
     }
 
+    /**
+     * Implementation of functional interface to determine if a number is
+     * prime or not
+     * @return A lambda function that determines a number's primeness
+     */
     PerformOperation isPrime(){
         PerformOperation primeOrComposite = (num) -> {
             if (num <= 1) System.out.println("NEITHER PRIME NOR COMPOSITE");
@@ -46,6 +61,11 @@ public class Solution {
         return primeOrComposite;
     }
 
+
+    /**
+     * Determines whether a given integer is a palindrome or not
+     * @return a Lambda function that determines palindrome or not
+     */
     PerformOperation isPalindrome(){
         PerformOperation isPalindromeOrNot = (num) -> {
             String stringValue = String.valueOf(num);

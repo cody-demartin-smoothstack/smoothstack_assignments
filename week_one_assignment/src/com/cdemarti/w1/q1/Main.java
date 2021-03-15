@@ -1,6 +1,10 @@
 package com.cdemarti.w1.q1;
 
 public class Main {
+    /**
+     * Main driver function
+     * @param args
+     */
     public static void main(String[] args) {
         Solution answer = new Solution();
 
