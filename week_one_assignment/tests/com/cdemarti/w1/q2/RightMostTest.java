@@ -22,4 +22,13 @@ public class RightMostTest {
         Integer[] results = {2, 2, 9};
         assertArrayEquals(results, test.createNewArray(test.list));
     }
+
+    @Test
+    public void testNewArrayMethodZero(){
+        Integer[] testTwo = {0};
+        RightMost test = new RightMost(testTwo);
+
+        Integer[] results = {0};
+        assertArrayEquals(results, test.createNewArray(test.list));
+    }
 }

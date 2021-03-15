@@ -14,13 +14,13 @@ public class Main {
 
         for(int[] selection : testCases){
             if(selection[0] == 1){
-                answer.checkOperation(answer.isOdd(), selection[1]);
+                Solution.checkOperation(answer.isOdd(), selection[1]);
             }
             else if(selection[0] == 2){
-                answer.checkOperation(answer.isPrime(), selection[1]);
+                Solution.checkOperation(answer.isPrime(), selection[1]);
             }
             else if(selection[0] == 3){
-                answer.checkOperation(answer.isPalindrome(), selection[1]);
+                Solution.checkOperation(answer.isPalindrome(), selection[1]);
             }
             else{
                 System.out.println("INVALID SELECTION");
