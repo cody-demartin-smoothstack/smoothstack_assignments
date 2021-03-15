@@ -13,7 +13,7 @@ public class LengthAndCharTest {
     @Test
     public void threeLetterStartWithA() {
         List<String> testCase = Arrays.asList("ace", "aluminum", "Ace", "beef");
-        List<String> expected = Arrays.asList("ace, Ace").stream().collect(Collectors.toList());
+        List<String> expected = Arrays.asList("ace", "Ace").stream().collect(Collectors.toList());
 
         assertEquals(expected, LengthAndChar.threeLetterStartWithA(testCase));
     }
