@@ -13,8 +13,8 @@ public class TargetSum {
 
     public boolean groupSumClump(int start, int[] nums, int target) {
 
-        // base and edge case. we are going to be subtracting from the target if we use a grouping
-        // if it eventually reaches 0, we can conclude we are able to use a group and return the number
+        // base cases. we are going to be subtracting from the target if we use a grouping
+        // if it eventually reaches 0, we can conclude we are able to use a path and return the number
         if (target == 0) return true;
         if(start >= nums.length) return false;
 

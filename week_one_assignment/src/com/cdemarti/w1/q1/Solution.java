@@ -1,7 +1,5 @@
 package com.cdemarti.w1.q1;
 
-import java.sql.SQLOutput;
-
 public class Solution {
 
     /**
@@ -43,7 +41,7 @@ public class Solution {
             if (num <= 1) System.out.println("NEITHER PRIME NOR COMPOSITE");
             else {
                 boolean state = false;
-                for (int i = 2; i < num / 2 + 1; i++){
+                for (int i = 2; i < num / 2; i++){
                     if((num % i) == 0){
                         state = true;
                         break;

@@ -13,9 +13,13 @@ public class SampleSingleton {
         // check to see if the instance has already been created or not, simply returning the instance will
         // never instantiate an instance
         if (instance == null) {
-            instance = new SampleSingleton();
-        }
+            synchronized (instance){
+                if(instance == null){
+                    instance = new SampleSingleton();
+                }
+            }
 
+        }
         return instance;
     }
 

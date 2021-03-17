@@ -17,7 +17,7 @@ public class SolutionTest {
         System.setOut(ps);
 
 
-        testAnswer.checkOperation(testAnswer.isOdd(), 5);
+        Solution.checkOperation(testAnswer.isOdd(), 5);
         assertEquals("ODD\n", outputStream.toString());
     }
 
@@ -29,7 +29,7 @@ public class SolutionTest {
         System.setOut(ps);
 
 
-        testAnswer.checkOperation(testAnswer.isOdd(), 6);
+        Solution.checkOperation(testAnswer.isOdd(), 6);
         assertEquals("EVEN\n", outputStream.toString());
     }
 
@@ -41,7 +41,7 @@ public class SolutionTest {
         System.setOut(ps);
 
 
-        testAnswer.checkOperation(testAnswer.isPrime(), 7);
+        Solution.checkOperation(testAnswer.isPrime(), 7);
         assertEquals("PRIME\n", outputStream.toString());
     }
 
@@ -53,7 +53,7 @@ public class SolutionTest {
         System.setOut(ps);
 
 
-        testAnswer.checkOperation(testAnswer.isPrime(), 14);
+        Solution.checkOperation(testAnswer.isPrime(), 14);
         assertEquals("COMPOSITE\n", outputStream.toString());
     }
 
@@ -65,7 +65,7 @@ public class SolutionTest {
         System.setOut(ps);
 
 
-        testAnswer.checkOperation(testAnswer.isPrime(), 0);
+        Solution.checkOperation(testAnswer.isPrime(), 0);
         assertEquals("NEITHER PRIME NOR COMPOSITE\n", outputStream.toString());
     }
 
@@ -76,7 +76,7 @@ public class SolutionTest {
         PrintStream ps = new PrintStream(outputStream);
         System.setOut(ps);
 
-        testAnswer.checkOperation(testAnswer.isPalindrome(), 1);
+        Solution.checkOperation(testAnswer.isPalindrome(), 1);
         assertEquals("IS PALINDROME\n", outputStream.toString());
     }
 
@@ -87,7 +87,7 @@ public class SolutionTest {
         PrintStream ps = new PrintStream(outputStream);
         System.setOut(ps);
 
-        testAnswer.checkOperation(testAnswer.isPalindrome(), 12324234);
+        Solution.checkOperation(testAnswer.isPalindrome(), 12324234);
         assertEquals("NOT PALINDROME\n", outputStream.toString());
     }
 
