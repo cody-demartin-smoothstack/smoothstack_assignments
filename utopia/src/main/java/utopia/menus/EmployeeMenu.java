@@ -3,6 +3,7 @@ package utopia.menus;
 import java.util.List;
 import java.util.Scanner;
 
+import utilities.FlightUtil;
 import utopia.dao.FlightDAO;
 import utopia.entity.Flight;
 import utopia.jdbc.DefaultConnection;
@@ -85,6 +86,9 @@ public class EmployeeMenu {
 			Integer selection;
 			do {
 				selection = input.nextInt();
+				if (selection == 1) {
+					FlightUtil.displayInformation(flight);
+				}
 			} while (selection != 0);
 			if (selection == 0) {
 				EmployeeMenu.printFlightList();
