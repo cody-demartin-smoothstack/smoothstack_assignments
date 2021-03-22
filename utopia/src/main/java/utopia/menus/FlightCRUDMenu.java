@@ -5,7 +5,10 @@ import java.sql.Timestamp;
 import java.util.Scanner;
 
 import utopia.admin.FlightsAdmin;
+import utopia.dao.AirplaneDAO;
+import utopia.dao.AirplaneTypeDAO;
 import utopia.dao.AirportDAO;
+import utopia.dao.RouteDAO;
 import utopia.entity.Flight;
 import utopia.jdbc.DefaultConnection;
 
@@ -26,7 +29,7 @@ public class FlightCRUDMenu {
 			do {
 				selection = input.nextInt();
 				if (selection == 1) {
-
+					newInput();
 				}
 				if (selection == 2) {
 					updateInput(flight);
@@ -46,6 +49,111 @@ public class FlightCRUDMenu {
 			input.close();
 		}
 
+	}
+
+	public static void newInput() {
+		FlightsAdmin fa = new FlightsAdmin();
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter route id.");
+		Flight nf = new Flight();
+		Connection conn = null;
+
+		try {
+			Integer routeId;
+			conn = def.getConnection();
+			do {
+				routeId = input.nextInt();
+				RouteDAO airportSearch = new RouteDAO(conn);
+				if (airportSearch.getSingleRoute(routeId) == null) {
+					System.out.println("Invalid airport. Pick another.");
+				} else {
+					nf.setRoute(airportSearch.getSingleRoute(routeId));
+					break;
+				}
+			} while (routeId != 0);
+
+			System.out.println("Enter airplane id.");
+			Integer planeId;
+			do {
+				planeId = input.nextInt();
+				AirplaneDAO airportSearch = new AirplaneDAO(conn);
+				if (airportSearch.getSingleAirplane(planeId) == null) {
+					System.out.println("Invalid airport. Pick another.");
+				} else {
+					nf.setAirplane(airportSearch.getSingleAirplane(planeId));
+					break;
+				}
+			} while (planeId != 0);
+
+			System.out.println("Enter new departure date and time (YYYY-MM-DD HH:MM:SS format).");
+			String newDepartureInfo;
+			do {
+				newDepartureInfo = input.nextLine();
+				Timestamp ts = Timestamp.valueOf(newDepartureInfo);
+				if (ts != null) {
+					nf.setDepartureTime(ts);
+					break;
+				} else {
+					System.out.println("Invalid datetime entry.");
+				}
+			} while (!newDepartureInfo.equals("quit"));
+			System.out.println("Enter new arrival date and time (YYYY-MM-DD HH:MM:SS format).");
+			String arrivalInfo;
+			do {
+				arrivalInfo = input.nextLine();
+				Timestamp ts = Timestamp.valueOf(arrivalInfo);
+				if (ts != null) {
+					nf.setArrivalTime(ts);
+					break;
+				} else {
+					System.out.println("Invalid datetime entry.");
+				}
+			} while (!arrivalInfo.equals("quit"));
+			System.out.println("Enter allowed first class seats as integer.");
+			Integer first;
+			do {
+				first = input.nextInt();
+				if (first >= 0 && first <= nf.getAirplane().getType().getMaxFirstClass()) {
+					nf.setAllowedFirst(first);
+					break;
+				} else {
+					System.out.println("Invalid input.");
+				}
+
+			} while (first != -1);
+
+			System.out.println("Enter allowed business class seats as integer.");
+			Integer business;
+			do {
+				business = input.nextInt();
+				if (business >= 0 && business <= nf.getAirplane().getType().getMaxBusinessClass()) {
+					nf.setAllowedBusiness(business);
+					break;
+				} else {
+					System.out.println("Invalid input.");
+				}
+			} while (business != -1);
+
+			System.out.println("Enter allowed econ class seats as integer.");
+			Integer econ;
+			do {
+				econ = input.nextInt();
+				if (econ >= 0 && econ <= nf.getAirplane().getType().getMaxEconClass()) {
+					nf.setAllowedEcon(econ);
+					break;
+				} else {
+					System.out.println("Invalid input.");
+				}
+			} while (econ != -1);
+			fa.addFlight(nf);
+			System.out.println("Added. Press enter to continue.");
+			System.in.read();
+			AdminMenu.printSelections();;
+		} catch (Exception e) {
+
+		} finally {
+			input.close();
+		}
 	}
 
 	public static void updateInput(Flight flight) {
@@ -124,13 +232,12 @@ public class FlightCRUDMenu {
 				if (first >= 0 && first <= flight.getAirplane().getType().getMaxFirstClass()) {
 					flight.setAllowedFirst(first);
 					break;
-				}
-				else {
+				} else {
 					System.out.println("Invalid input.");
 				}
-				
+
 			} while (first != -1);
-			
+
 			System.out.println("Enter allowed business class seats as integer, -1 to skip.");
 			Integer business;
 			do {
@@ -138,12 +245,11 @@ public class FlightCRUDMenu {
 				if (business >= 0 && business <= flight.getAirplane().getType().getMaxBusinessClass()) {
 					flight.setAllowedBusiness(business);
 					break;
-				}
-				else {
+				} else {
 					System.out.println("Invalid input.");
 				}
 			} while (business != -1);
-			
+
 			System.out.println("Enter allowed econ class seats as integer, -1 to skip.");
 			Integer econ;
 			do {
@@ -151,8 +257,7 @@ public class FlightCRUDMenu {
 				if (econ >= 0 && econ <= flight.getAirplane().getType().getMaxEconClass()) {
 					flight.setAllowedEcon(econ);
 					break;
-				}
-				else {
+				} else {
 					System.out.println("Invalid input.");
 				}
 			} while (econ != -1);
@@ -162,12 +267,9 @@ public class FlightCRUDMenu {
 			selectAction(flight);
 		} catch (Exception e) {
 
-		}
-		finally {
+		} finally {
 			input.close();
 		}
 	}
-	
-	
-	
+
 }

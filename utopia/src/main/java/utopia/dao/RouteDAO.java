@@ -25,7 +25,7 @@ public class RouteDAO extends BaseDAO<Route> {
 		save("update route set origin_id = ?, destination_id = ? where id = ?",
 				new Object[] { route.getOrigin().getIataId(), route.getDestination().getIataId(), route.getId() });
 	}
-
+ 
 	public List<Route> index(Route route) {
 		return read("select * from route", null);
 	}
