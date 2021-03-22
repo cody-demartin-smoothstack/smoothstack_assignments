@@ -3,19 +3,19 @@ package utopia.admin;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import utopia.dao.AirportDAO;
-import utopia.entity.Airport;
+import utopia.dao.UserDAO;
+import utopia.entity.User;
 import utopia.jdbc.DefaultConnection;
 
-public class AirportAdmin {
+public class UserAdmin {
 	DefaultConnection def = new DefaultConnection();
 
-	public void addAirport(Airport airport) throws SQLException {
+	public void addEmployee(User user) throws SQLException {
 		Connection conn = null;
 		try {
 			conn = def.getConnection();
-			AirportDAO apDAO = new AirportDAO(conn);
-			apDAO.add(airport);
+			UserDAO uDAO = new UserDAO(conn);
+			uDAO.addEmployee(user);
 			conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -28,12 +28,12 @@ public class AirportAdmin {
 		}
 	}
 
-	public void updateAirport(Airport airport) throws SQLException {
+	public void addCustomer(User user) throws SQLException {
 		Connection conn = null;
 		try {
 			conn = def.getConnection();
-			AirportDAO apDAO = new AirportDAO(conn);
-			apDAO.update(airport);
+			UserDAO uDAO = new UserDAO(conn);
+			uDAO.addCustomer(user);
 			conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,12 +46,30 @@ public class AirportAdmin {
 		}
 	}
 
-	public void deleteAirport(Airport airport) throws SQLException {
+	public void updateUser(User user) throws SQLException {
 		Connection conn = null;
 		try {
 			conn = def.getConnection();
-			AirportDAO apDAO = new AirportDAO(conn);
-			apDAO.delete(airport);
+			UserDAO uDAO = new UserDAO(conn);
+			uDAO.update(user);
+			conn.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			conn.rollback();
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+
+		}
+	}
+
+	public void deleteUser(User user) throws SQLException {
+		Connection conn = null;
+		try {
+			conn = def.getConnection();
+			UserDAO uDAO = new UserDAO(conn);
+			uDAO.delete(user);
 			conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
