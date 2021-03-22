@@ -40,7 +40,7 @@ public class FlightUtil {
 			System.out.println("Economy ---> " + FlightUtil.getRemainingEcon(flight));
 			System.out.println("(Enter 0 to return)");
 			Integer selection;
-			do {
+			do { 
 				selection = input.nextInt();
 			} while (selection != 0);
 			if (selection == 0) {

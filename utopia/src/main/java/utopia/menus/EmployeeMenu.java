@@ -37,7 +37,6 @@ public class EmployeeMenu {
 		}
 
 		catch (Exception e) {
-
 		} finally {
 			input.close();
 		}
@@ -46,7 +45,7 @@ public class EmployeeMenu {
 	public static void printFlightList() throws SQLException {
 		Scanner input = new Scanner(System.in);
 		Connection conn = null;
-		
+
 		try {
 			conn = def.getConnection();
 			FlightDAO flightData = new FlightDAO(conn);
@@ -77,7 +76,7 @@ public class EmployeeMenu {
 			e.printStackTrace();
 		} finally {
 			input.close();
-			if (conn!= null) {
+			if (conn != null) {
 				conn.close();
 			}
 		}

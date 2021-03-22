@@ -2,19 +2,20 @@ package utopia.admin;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import utopia.dao.PassengerDAO;
-import utopia.entity.Passenger;
+
+import utopia.dao.AirportDAO;
+import utopia.entity.Airport;
 import utopia.jdbc.DefaultConnection;
 
-public class PassengersAdmin {
+public class AirportAdmin {
 	DefaultConnection def = new DefaultConnection();
 
-	public void addPassenger(Passenger passenger) throws SQLException {
+	public void addAirport(Airport airport) throws SQLException {
 		Connection conn = null;
 		try {
 			conn = def.getConnection();
-			PassengerDAO passengerAdder = new PassengerDAO(conn);
-			passengerAdder.add(passenger);
+			AirportDAO apDAO = new AirportDAO(conn);
+			apDAO.add(airport);
 			conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -27,12 +28,12 @@ public class PassengersAdmin {
 		}
 	}
 
-	public void updateFlight(Passenger passenger) throws SQLException {
+	public void updateAirport(Airport airport) throws SQLException {
 		Connection conn = null;
 		try {
 			conn = def.getConnection();
-			PassengerDAO passengerUpdater = new PassengerDAO(conn);
-			passengerUpdater.add(passenger);
+			AirportDAO apDAO = new AirportDAO(conn);
+			apDAO.update(airport);
 			conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,13 +45,13 @@ public class PassengersAdmin {
 
 		}
 	}
-
-	public void deleteFlight(Passenger passenger) throws SQLException {
+	
+	public void deleteAirport(Airport airport) throws SQLException {
 		Connection conn = null;
 		try {
 			conn = def.getConnection();
-			PassengerDAO passengerDeleter = new PassengerDAO(conn);
-			passengerDeleter.delete(passenger);
+			AirportDAO apDAO = new AirportDAO(conn);
+			apDAO.delete(airport);
 			conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
