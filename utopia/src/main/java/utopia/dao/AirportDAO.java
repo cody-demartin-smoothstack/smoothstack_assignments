@@ -16,6 +16,9 @@ public class AirportDAO extends BaseDAO<Airport> {
 	
 	public Airport getSingleAirport(String iata) {
 		List<Airport> entries = read("select * from airport where iata_id = '" + iata +"'", null);
+		if (entries.size() == 0) {
+			return null;
+		}
 		return entries.get(0);
 	}
 	

@@ -1,5 +1,7 @@
 package utopia.menus;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,6 +11,7 @@ import utopia.entity.Flight;
 import utopia.jdbc.DefaultConnection;
 
 public class EmployeeMenu {
+	static DefaultConnection def = new DefaultConnection();
 
 	public static void printMain() {
 		System.out.println("1) Enter flight management system");
@@ -40,11 +43,13 @@ public class EmployeeMenu {
 		}
 	}
 
-	public static void printFlightList() {
+	public static void printFlightList() throws SQLException {
 		Scanner input = new Scanner(System.in);
-
+		Connection conn = null;
+		
 		try {
-			FlightDAO flightData = new FlightDAO(DefaultConnection.getConnection());
+			conn = def.getConnection();
+			FlightDAO flightData = new FlightDAO(conn);
 			List<Flight> flights = flightData.index(null);
 			for (int i = 0; i < flights.size(); i++) {
 				System.out.println((i + 1) + ") " + flights.get(i).getRoute().getDestination().getIataId() + ", "
@@ -72,6 +77,9 @@ public class EmployeeMenu {
 			e.printStackTrace();
 		} finally {
 			input.close();
+			if (conn!= null) {
+				conn.close();
+			}
 		}
 	}
 
@@ -88,6 +96,8 @@ public class EmployeeMenu {
 				selection = input.nextInt();
 				if (selection == 1) {
 					FlightUtil.displayInformation(flight);
+				} else if (selection == 2) {
+					FlightUtil.beginUpdate(flight);
 				}
 			} while (selection != 0);
 			if (selection == 0) {

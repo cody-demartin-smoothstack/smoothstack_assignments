@@ -15,12 +15,17 @@ public class RouteDAO extends BaseDAO<Route> {
 		super(conn);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Route getSingleRoute(Integer id) {
 		List<Route> entries = read("select * from route where id = " + id, null);
 		return entries.get(0);
 	}
-	
+
+	public void updateRoute(Route route) throws ClassNotFoundException, SQLException {
+		save("update route set origin_id = ?, destination_id = ? where id = ?",
+				new Object[] { route.getOrigin().getIataId(), route.getDestination().getIataId(), route.getId() });
+	}
+
 	public List<Route> index(Route route) {
 		return read("select * from route", null);
 	}
@@ -29,8 +34,8 @@ public class RouteDAO extends BaseDAO<Route> {
 	public List<Route> extractData(ResultSet results) throws ClassNotFoundException, SQLException {
 		AirportDAO airportFinder = new AirportDAO(this.conn);
 		List<Route> routes = new ArrayList<Route>();
-		
-		while(results.next()) {
+
+		while (results.next()) {
 			Route route = new Route();
 			route.setId(results.getInt("id"));
 			Airport origin = airportFinder.getSingleAirport(results.getString("origin_id"));
@@ -39,9 +44,9 @@ public class RouteDAO extends BaseDAO<Route> {
 			route.setDestination(destination);
 			routes.add(route);
 		}
-		
+
 		return routes;
-		
+
 	}
 
 }

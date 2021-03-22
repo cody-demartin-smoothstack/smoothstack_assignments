@@ -21,43 +21,37 @@ public class MainMenu {
 		System.out.println("1) Employee");
 		System.out.println("2) Customer");
 		System.out.println("3) Admin");
-		
-		
+
 		try {
 			int answer;
 			do {
 				answer = input.nextInt();
-				if(answer == 1) {
-					System.out.print("\033[H\033[2J");   
-				    System.out.flush(); 
+				if (answer == 1) {
+					System.out.print("\033[H\033[2J");
+					System.out.flush();
 					EmployeeMenu.printMain();
-				}
-				else if(answer == 2) {
-					
-				}
-				else if(answer == 3) {
-					
-				}
-				else if (answer != 0) {
+				} else if (answer == 2) {
+
+				} else if (answer == 3) {
+
+				} else if (answer != 0) {
 					System.out.println("Please enter a valid selection.");
 					MainMenu.printMain();
 				}
 			} while (answer != 0);
-			
-			
+
 			if (answer == 0) {
-				System.out.print("\033[H\033[2J");   
-			    System.out.flush(); 
-			    System.exit(0);
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
+				System.exit(0);
 			}
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			input.close();
 		}
-		
+
 	}
 
 }

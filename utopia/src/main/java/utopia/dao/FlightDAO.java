@@ -17,31 +17,47 @@ public class FlightDAO extends BaseDAO<Flight> {
 	public FlightDAO(Connection conn) {
 		super(conn);
 	}
-	
+
 	public List<Flight> index(Flight flight) {
 		return read("select * from flight", null);
+	}
+
+	public void updateFLightEmployee(Flight flight) throws ClassNotFoundException, SQLException {
+		save("update flight set route_id = ?, departure_time = ?, arrival_time = ? where id = ?", new Object[] {
+				flight.getRoute().getId(), flight.getDepartureTime(), flight.getArrivalTime(), flight.getId() });
 	}
 
 	@Override
 	public List<Flight> extractData(ResultSet results) throws ClassNotFoundException, SQLException {
 		List<Flight> flights = new ArrayList<>();
-		RouteDAO route = new RouteDAO(DefaultConnection.getConnection());
-		AirplaneDAO airplane = new AirplaneDAO(DefaultConnection.getConnection());
-		
-		while(results.next()) {
-			Flight flight = new Flight();
-			flight.setId(results.getInt("id"));
-			Route flightRoute = route.getSingleRoute(results.getInt("route_id"));
-			Airplane flightPlane = airplane.getSingleAirplane(results.getInt("airplane_id"));
-			flight.setRoute(flightRoute);
-			flight.setAirplane(flightPlane);
-			flight.setDepartureTime(results.getTimestamp("departure_time"));
-			flight.setReservedSeats(results.getInt("reserved_seats"));
-			flight.setSeatPrice(results.getFloat("seat_price"));
-			flight.setArrivalTime(results.getTimestamp("arrival_time"));
-			flights.add(flight);
-		}		
+		DefaultConnection def = new DefaultConnection();
+		Connection conn = def.getConnection();
+		RouteDAO route = new RouteDAO(conn);
+		AirplaneDAO airplane = new AirplaneDAO(conn);
+		try {
+			while (results.next()) {
+				Flight flight = new Flight();
+				flight.setId(results.getInt("id"));
+				Route flightRoute = route.getSingleRoute(results.getInt("route_id"));
+				Airplane flightPlane = airplane.getSingleAirplane(results.getInt("airplane_id"));
+				flight.setRoute(flightRoute);
+				flight.setAirplane(flightPlane);
+				flight.setDepartureTime(results.getTimestamp("departure_time"));
+				flight.setArrivalTime(results.getTimestamp("arrival_time"));
+				flight.setAllowedBusiness(results.getInt("allowed_business"));
+				flight.setAllowedFirst(results.getInt("allowed_first"));
+				flight.setAllowedEcon(results.getInt("allowed_econ"));
+				flights.add(flight);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+
 		return flights;
 	}
-	
+
 }

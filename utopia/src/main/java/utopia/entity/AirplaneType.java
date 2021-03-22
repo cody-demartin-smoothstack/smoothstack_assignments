@@ -3,32 +3,36 @@ package utopia.entity;
 public class AirplaneType {
 	private int id;
 	private int maxCapacity;
-	private int firstClass;
-	private int businessClass;
-	private int econClass;
+	private int maxFirstClass;
+	private int maxBusinessClass;
+	private int maxEconClass;
 
-	public int getFirstClass() {
-		return firstClass;
+	public int getMaxFirstClass() {
+		return maxFirstClass;
 	}
 
-	public void setFirstClass(int firstClass) {
-		this.firstClass = firstClass;
+	public void setMaxFirstClass(int maxFirstClass) {
+		this.maxFirstClass = maxFirstClass;
 	}
 
-	public int getBusinessClass() {
-		return businessClass;
+	public int getMaxBusinessClass() {
+		return maxBusinessClass;
 	}
 
-	public void setBusinessClass(int businessClass) {
-		this.businessClass = businessClass;
+	public void setMaxBusinessClass(int maxBusinessClass) {
+		this.maxBusinessClass = maxBusinessClass;
 	}
 
-	public int getEconClass() {
-		return econClass;
+	public int getMaxEconClass() {
+		return maxEconClass;
 	}
 
-	public void setEconClass(int econClass) {
-		this.econClass = econClass;
+	public void setMaxEconClass(int maxEconClass) {
+		this.maxEconClass = maxEconClass;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getMaxCapacity() {
@@ -41,10 +45,6 @@ public class AirplaneType {
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@Override

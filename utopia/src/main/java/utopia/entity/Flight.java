@@ -15,9 +15,34 @@ public class Flight {
 	private Route route;
 	private Airplane airplane;
 	private Timestamp departureTime;
-	private int reservedSeats;
-	private float seatPrice;
 	private Timestamp arrivalTime;
+	private int allowedFirst;
+	private int allowedBusiness;
+	private int allowedEcon;
+
+	public int getAllowedFirst() {
+		return allowedFirst;
+	}
+
+	public void setAllowedFirst(int allowedFirst) {
+		this.allowedFirst = allowedFirst;
+	}
+
+	public int getAllowedBusiness() {
+		return allowedBusiness;
+	}
+
+	public void setAllowedBusiness(int allowedBusiness) {
+		this.allowedBusiness = allowedBusiness;
+	}
+
+	public int getAllowedEcon() {
+		return allowedEcon;
+	}
+
+	public void setAllowedEcon(int allowedEcon) {
+		this.allowedEcon = allowedEcon;
+	}
 
 	public Timestamp getArrivalTime() {
 		return arrivalTime;
@@ -51,28 +76,12 @@ public class Flight {
 		return departureTime;
 	}
 
-	public int getReservedSeats() {
-		return reservedSeats;
-	}
-
-	public float getSeatPrice() {
-		return seatPrice;
-	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
 
 	public void setDepartureTime(Timestamp date) {
 		this.departureTime = date;
-	}
-
-	public void setReservedSeats(int reservedSeats) {
-		this.reservedSeats = reservedSeats;
-	}
-
-	public void setSeatPrice(float seatPrice) {
-		this.seatPrice = seatPrice;
 	}
 
 	@Override

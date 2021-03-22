@@ -11,9 +11,8 @@ public class DefaultConnection {
 	private static final String password = "Cody11020!";
 	
 	
-	public static Connection getConnection() throws ClassNotFoundException {
-		Class.forName(driver);
-		
+	public Connection getConnection() throws ClassNotFoundException {
+		Class.forName(driver);		
 		try {
 			Connection conn = DriverManager.getConnection(url, username, password);
 			conn.setAutoCommit(false);

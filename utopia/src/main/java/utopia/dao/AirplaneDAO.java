@@ -15,7 +15,7 @@ public class AirplaneDAO extends BaseDAO<Airplane> {
 	public AirplaneDAO(Connection conn) {
 		super(conn);
 	}
-	
+
 	public Airplane getSingleAirplane(Integer id) {
 		List<Airplane> entries = read("select * from airplane where id = " + id, null);
 		return entries.get(0);
@@ -23,19 +23,27 @@ public class AirplaneDAO extends BaseDAO<Airplane> {
 
 	@Override
 	public List<Airplane> extractData(ResultSet results) throws ClassNotFoundException, SQLException {
-		AirplaneTypeDAO type = new AirplaneTypeDAO(DefaultConnection.getConnection());
+		DefaultConnection def = new DefaultConnection();
+		Connection conn = def.getConnection();
+		AirplaneTypeDAO type = new AirplaneTypeDAO(conn);
 		List<Airplane> airplanes = new ArrayList<Airplane>();
-		
-		while(results.next()) {
-			Airplane airplane = new Airplane();
-			AirplaneType planeType = type.getSingleType(results.getInt("type_id"));
-			airplane.setId(results.getInt("id"));
-			airplane.setType(planeType);
-			airplanes.add(airplane);
+		try {
+			while (results.next()) {
+				Airplane airplane = new Airplane();
+				AirplaneType planeType = type.getSingleType(results.getInt("type_id"));
+				airplane.setId(results.getInt("id"));
+				airplane.setType(planeType);
+				airplanes.add(airplane);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
-		
+		finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
 		return airplanes;
 	}
-	
 
 }
