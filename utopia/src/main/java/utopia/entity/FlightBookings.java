@@ -3,16 +3,23 @@ package utopia.entity;
 public class FlightBookings {
 	private int flightId;
 	private int bookingId;
-	
-	
+
 	public int getFlightId() {
 		return flightId;
 	}
+
+	public void setFlightId(int flightId) {
+		this.flightId = flightId;
+	}
+
 	public int getBookingId() {
 		return bookingId;
 	}
-	
-	
+
+	public void setBookingId(int bookingId) {
+		this.bookingId = bookingId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -21,6 +28,7 @@ public class FlightBookings {
 		result = prime * result + flightId;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -36,7 +44,5 @@ public class FlightBookings {
 			return false;
 		return true;
 	}
-	
-	
 
 }

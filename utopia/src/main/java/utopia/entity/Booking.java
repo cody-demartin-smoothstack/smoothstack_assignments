@@ -13,11 +13,11 @@ public class Booking {
 	private String confirmationCode;
 	private String type;
 
-	public boolean isActive() {
+	public boolean getIsActive() {
 		return isActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 
@@ -31,6 +31,10 @@ public class Booking {
 
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getType() {

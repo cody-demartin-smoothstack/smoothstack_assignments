@@ -17,7 +17,7 @@ public class User {
 	public void setRoleId(int roleId) {
 		this.roleId = roleId;
 	}
-	public String getGivenName() {
+	public String getGivenName() { 
 		return givenName;
 	}
 	public void setGivenName(String givenName) {
@@ -56,7 +56,9 @@ public class User {
 	public int getId() {
 		return id;
 	}
-	
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	
 	@Override
 	public int hashCode() {

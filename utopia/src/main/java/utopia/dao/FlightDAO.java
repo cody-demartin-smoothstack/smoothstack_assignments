@@ -22,27 +22,40 @@ public class FlightDAO extends BaseDAO<Flight> {
 		return read("select * from flight", null);
 	}
 
+	public void create(Flight flight) throws ClassNotFoundException, SQLException {
+		save("insert into flight(id,route_id,airplane_id,departure_time,arrival_time,"
+				+ "reserved_seats,seat_price) values(?,?,?,?,?,?,?)",
+				new Object[] { flight.getId(), flight.getRoute().getId(), flight.getAirplane().getId(),
+						flight.getDepartureTime(), flight.getArrivalTime(), flight.getAllowedFirst(),
+						flight.getAllowedBusiness(), flight.getAllowedEcon() });
+	}
+
+	public void delete(Flight flight) throws ClassNotFoundException, SQLException {
+		save("delete from flight where id=?", new Object[] { flight.getId() });
+	}
+
+	public void update(Flight flight) throws ClassNotFoundException, SQLException {
+		save("update flight set route_id=?, airplane_id=?, departure_time=?, arrival_time=?, allowed_first=?, allowed_business=?, allowed_econ=? where id=?",
+				new Object[] { flight.getRoute().getId(), flight.getAirplane().getId(), flight.getDepartureTime(),
+						flight.getArrivalTime(), flight.getAllowedFirst(), flight.getAllowedBusiness(),
+						flight.getAllowedEcon(), flight.getId() });
+	}
+
 	public void updateSeatCountFirst(Flight flight) {
-		save("update flight set allowed_first = ? where id = ?", new Object[] {
-			flight.getAllowedFirst(),
-			flight.getId()
-		});
+		save("update flight set allowed_first = ? where id = ?",
+				new Object[] { flight.getAllowedFirst(), flight.getId() });
 	}
-	
+
 	public void updateSeatCountBusiness(Flight flight) {
-		save("update flight set allowed_business = ? where id = ?", new Object[] {
-			flight.getAllowedBusiness(),
-			flight.getId()
-		});
+		save("update flight set allowed_business = ? where id = ?",
+				new Object[] { flight.getAllowedBusiness(), flight.getId() });
 	}
-	
+
 	public void updateSeatCountEcon(Flight flight) {
-		save("update flight set allowed_econ = ? where id = ?", new Object[] {
-			flight.getAllowedEcon(),
-			flight.getId()
-		});
+		save("update flight set allowed_econ = ? where id = ?",
+				new Object[] { flight.getAllowedEcon(), flight.getId() });
 	}
-	
+
 	public void updateFLightEmployee(Flight flight) throws ClassNotFoundException, SQLException {
 		save("update flight set route_id = ?, departure_time = ?, arrival_time = ? where id = ?", new Object[] {
 				flight.getRoute().getId(), flight.getDepartureTime(), flight.getArrivalTime(), flight.getId() });
