@@ -98,6 +98,8 @@ public class EmployeeMenu {
 					FlightUtil.displayInformation(flight);
 				} else if (selection == 2) {
 					FlightUtil.beginUpdate(flight);
+				} else if (selection == 3) {
+					FlightUtil.addSeats(flight);
 				}
 			} while (selection != 0);
 			if (selection == 0) {

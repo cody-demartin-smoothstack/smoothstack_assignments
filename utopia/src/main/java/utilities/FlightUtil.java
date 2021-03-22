@@ -166,7 +166,7 @@ public class FlightUtil {
 
 	private static String updateFlight(Flight flight) throws SQLException {
 		Connection conn = null;
-		
+
 		try {
 			conn = dfltConn.getConnection();
 			RouteDAO routeUpdater = new RouteDAO(conn);
@@ -176,15 +176,93 @@ public class FlightUtil {
 			flightUpdater.updateFLightEmployee(flight);
 			conn.commit();
 			return "Flight updated successfully";
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			conn.rollback();
 			return "Unable to update flight.";
-		}
-		finally {
+		} finally {
 			if (conn != null) {
 				conn.close();
 			}
 		}
+	}
+
+	public static void addSeats(Flight flight) {
+		Connection conn = null;
+		Scanner input = new Scanner(System.in);
+
+		System.out.println("Pick the class to add seats of.");
+		System.out.println("1) First");
+		System.out.println("2) Business");
+		System.out.println("3) Economy");
+
+		try {
+			Integer selection;
+			do {
+				selection = input.nextInt();
+				if (selection == 1) {
+					FlightUtil.seatsMenu("first", flight);
+				} else if (selection == 2) {
+					FlightUtil.seatsMenu("business", flight);
+				} else if (selection == 3) {
+					FlightUtil.seatsMenu("econ", flight);
+				}
+			} while (selection != 0);
+
+		} catch (Exception e) {
+
+		} finally {
+
+		}
+	}
+
+	private static void seatsMenu(String string, Flight flight) throws SQLException {
+		Integer n;
+		Scanner input = new Scanner(System.in);
+		Connection conn = null;
+
+		if (string.equals("first")) {
+			n = FlightUtil.getRemainingFirst(flight);
+		} else if (string.equals("business")) {
+			n = FlightUtil.getRemainingBusiness(flight);
+		} else {
+			n = FlightUtil.getRemainingEcon(flight);
+		}
+
+		System.out.println("Existing number of seats: " + n);
+		System.out.println("New Number of seats: ");
+		System.out.println("(Press 0 to go back");
+		try {
+			conn = dfltConn.getConnection();
+			FlightDAO flightUpdater = new FlightDAO(conn);
+			Integer selection;
+			do {
+				selection = input.nextInt();
+				if (string.equals("first") && selection <= FlightUtil.getRemainingFirst(flight)) {
+					flight.setAllowedFirst(flight.getAllowedFirst() + n);
+					flightUpdater.updateSeatCountFirst(flight);
+					break;
+				} else if (string.equals("business") && selection <= FlightUtil.getRemainingBusiness(flight)) {
+					flight.setAllowedBusiness(flight.getAllowedBusiness() + n);
+					flightUpdater.updateSeatCountBusiness(flight);
+					break;
+				} else if (string.equals("econ") && selection <= FlightUtil.getRemainingEcon(flight)) {
+					flight.setAllowedEcon(flight.getAllowedEcon() + n);
+					flightUpdater.updateSeatCountEcon(flight);
+					break;
+				} else if (selection != 0) {
+					System.out.println("Invalid entry. Not enough space.");
+				}
+			} while (selection != 0);
+			conn.commit();
+			EmployeeMenu.getFlightInfo(flight);
+		} catch (Exception e) {
+			e.printStackTrace();
+			conn.rollback();
+		} finally {
+			input.close();
+			conn.close();
+		}
+
 	}
 }
