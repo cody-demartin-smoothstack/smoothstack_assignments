@@ -16,7 +16,7 @@ public class AirportDAO extends BaseDAO<Airport> {
 	
 	public void add(Airport airport) throws ClassNotFoundException, SQLException {
 		save("insert into airport values (?, ?)",
-				new Object[] {airport.getIataId(), airport.getCity()});
+				new Object[] {airport.getIataId(), airport.getCity()}); 
 	}
 
 	public void update(Airport airport) throws ClassNotFoundException, SQLException {

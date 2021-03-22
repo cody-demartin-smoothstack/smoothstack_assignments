@@ -44,7 +44,7 @@ public class FlightUtil {
 				selection = input.nextInt();  
 			} while (selection != 0);
 			if (selection == 0) {
-				EmployeeMenu.getFlightInfo(flight);
+				EmployeeMenu.getFlightInfo(flight); 
 			}
 		} catch (Exception e) {
 
@@ -54,25 +54,25 @@ public class FlightUtil {
 
 	}
 
-	private static String toDate(Timestamp timestamp) {
+	public static String toDate(Timestamp timestamp) {
 		LocalDate date = timestamp.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		return date.format(DateTimeFormatter.ISO_LOCAL_DATE);
 	}
 
-	private static String toTime(Timestamp timestamp) {
+	public static String toTime(Timestamp timestamp) {
 		LocalDateTime time = timestamp.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 		return time.format(DateTimeFormatter.ISO_LOCAL_TIME);
 	}
 
-	private static Integer getRemainingFirst(Flight flight) {
+	public static Integer getRemainingFirst(Flight flight) {
 		return flight.getAirplane().getType().getMaxFirstClass() - flight.getAllowedFirst();
 	}
 
-	private static Integer getRemainingEcon(Flight flight) {
+	public static Integer getRemainingEcon(Flight flight) {
 		return flight.getAirplane().getType().getMaxEconClass() - flight.getAllowedEcon();
 	}
 
-	private static Integer getRemainingBusiness(Flight flight) {
+	public static Integer getRemainingBusiness(Flight flight) {
 		return flight.getAirplane().getType().getMaxBusinessClass() - flight.getAllowedBusiness();
 	}
 

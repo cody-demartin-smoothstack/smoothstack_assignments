@@ -17,7 +17,7 @@ public class BookingDAO extends BaseDAO<Booking> {
 
 	public void create(Booking booking) throws ClassNotFoundException, SQLException {
 		save("insert into booking values (?,?,?,?)",
-				new Object[] { booking.getId(), booking.getIsActive(), booking.getConfirmationCode(), booking.getType() });
+				new Object[] {booking.getId(), booking.getIsActive(), booking.getConfirmationCode(), booking.getType() });
 			}
 
 	public void update(Booking booking) throws ClassNotFoundException, SQLException {
@@ -34,6 +34,16 @@ public class BookingDAO extends BaseDAO<Booking> {
 		return read("select * from booking", new Object[] {});
 	}
 
+	public Booking readOne(Integer bookingId) throws ClassNotFoundException, SQLException {
+		List<Booking> bookings = read("select * from booking where id = " + bookingId, new Object[] {});
+		if (bookings.size() != 0) {
+			return bookings.get(0);
+		}
+		else {
+			return null;
+		}
+	}
+	
 	public List<Booking> readAllCancelled() throws ClassNotFoundException, SQLException {
 		return read("select * from booking where is_active=0", new Object[] {});
 	}

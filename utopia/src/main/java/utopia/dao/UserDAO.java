@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import utopia.entity.Airport;
 import utopia.entity.User;
 
 public class UserDAO extends BaseDAO<User> {
@@ -35,6 +36,14 @@ public class UserDAO extends BaseDAO<User> {
 	public void delete(User user) throws ClassNotFoundException, SQLException{
 		save("delete from user where id=?",
 				new Object[] {user.getId()});
+	}
+	
+	public User getSingleUser(String username, String password) {
+		List<User> entries = read("select * from user where username = '" + username +"' and password = '" + password + "'", null);
+		if (entries.size() == 0) {
+			return null;
+		}
+		return entries.get(0);
 	}
 	
 	public List<User> readAllEmployees() throws ClassNotFoundException, SQLException{

@@ -5,8 +5,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+import utopia.admin.PassengersAdmin;
 import utopia.dao.FlightDAO;
 import utopia.entity.Flight;
+import utopia.entity.Passenger;
 import utopia.jdbc.DefaultConnection;
 
 public class AdminMenu {
@@ -95,6 +97,21 @@ public class AdminMenu {
 			conn.close();
 			input.close();
 		}
+		
+	}
+	
+	public static void passengerListAdminMenu() throws SQLException {
+		Scanner input = new Scanner(System.in);
+		PassengersAdmin pa = new PassengersAdmin();
+		List<Passenger> passengers = pa.index();
+		System.out.print("Please enter the number of the passenger you would like to view (press 0 to go back): ");
+		Integer selection;
+		do {
+			selection = input.nextInt();
+			if (selection >= 1 && selection <= passengers.size()) {
+				passengers.get(selection - 1);
+			}
+		} while (selection != 0);
 		
 	}
 

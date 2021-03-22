@@ -39,7 +39,7 @@ public class FlightDAO extends BaseDAO<Flight> {
 				new Object[] { flight.getRoute().getId(), flight.getAirplane().getId(), flight.getDepartureTime(),
 						flight.getArrivalTime(), flight.getAllowedFirst(), flight.getAllowedBusiness(),
 						flight.getAllowedEcon(), flight.getId() });
-	}
+	} 
 
 	public void updateSeatCountFirst(Flight flight) {
 		save("update flight set allowed_first = ? where id = ?",
@@ -54,6 +54,17 @@ public class FlightDAO extends BaseDAO<Flight> {
 	public void updateSeatCountEcon(Flight flight) {
 		save("update flight set allowed_econ = ? where id = ?",
 				new Object[] { flight.getAllowedEcon(), flight.getId() });
+	}
+	
+	public Flight getOne(Integer flightId) {
+		List<Flight> flights = read("select * from flight where id = " + flightId, new Object[] {});
+		if (flights.size() != 0) {
+			return flights.get(0);
+		}
+		else {
+			return null;
+		}
+		
 	}
 
 	public void updateFLightEmployee(Flight flight) throws ClassNotFoundException, SQLException {

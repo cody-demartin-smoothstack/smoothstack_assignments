@@ -43,4 +43,7 @@ public class BookingGuest {
 			return false;
 		return true;
 	}
+	public void setBookingId(int bid) {
+		this.bookingId = bid;
+	}
 }

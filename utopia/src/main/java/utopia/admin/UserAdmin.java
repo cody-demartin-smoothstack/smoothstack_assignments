@@ -27,6 +27,27 @@ public class UserAdmin {
 
 		}
 	}
+	
+	public User getUser(String username, String password) throws SQLException {
+		Connection conn = null;
+		try {
+			conn = def.getConnection();
+			UserDAO uDAO = new UserDAO(conn);
+			User target = uDAO.getSingleUser(username, password);
+			if (target != null) {
+				return target;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+
+		}
+		return null;
+	}
 
 	public void addCustomer(User user) throws SQLException {
 		Connection conn = null;

@@ -36,7 +36,7 @@ public class EmployeeMenu {
 			}
 		}
 
-		catch (Exception e) {
+		catch (Exception e) { 
 		} finally {
 			input.close();
 		} 

@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import utopia.admin.FlightsAdmin;
 import utopia.dao.AirplaneDAO;
-import utopia.dao.AirplaneTypeDAO;
 import utopia.dao.AirportDAO;
 import utopia.dao.RouteDAO;
 import utopia.entity.Flight;

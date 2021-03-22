@@ -31,7 +31,7 @@ public class MainMenu {
 					System.out.flush();
 					EmployeeMenu.printMain();
 				} else if (answer == 2) {
-
+					TravelerMenu.mainMenu();
 				} else if (answer == 3) {
 					AdminMenu.printSelections();
 				} else if (answer != 0) {
