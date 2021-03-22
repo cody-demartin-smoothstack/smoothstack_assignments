@@ -33,7 +33,7 @@ public class MainMenu {
 				} else if (answer == 2) {
 
 				} else if (answer == 3) {
-
+					AdminMenu.printSelections();
 				} else if (answer != 0) {
 					System.out.println("Please enter a valid selection.");
 					MainMenu.printMain();

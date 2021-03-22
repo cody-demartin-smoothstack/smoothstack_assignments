@@ -41,7 +41,7 @@ public class FlightUtil {
 			System.out.println("(Enter 0 to return)");
 			Integer selection;
 			do { 
-				selection = input.nextInt();
+				selection = input.nextInt();  
 			} while (selection != 0);
 			if (selection == 0) {
 				EmployeeMenu.getFlightInfo(flight);
